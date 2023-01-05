@@ -1,0 +1,573 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Loophole Letters Blog",
+    "home_page_url": "https://loophole-letters.vercel.app/",
+    "description": "Coding, Music and Electronics",
+    "icon": "https://loophole-letters.vercel.app/logo.png",
+    "items": [
+        {
+            "id": "https://loophole-letters.vercel.app/web-audio-scheduling",
+            "url": "https://loophole-letters.vercel.app/web-audio-scheduling",
+            "title": "Web Audio Scheduling",
+            "summary": "Comparing different approaches to schedule Web Audio",
+            "image": "https://loophole-letters.vercel.app/img/scheduling/shortinterval.png",
+            "date_modified": "2022-09-02T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/claviature",
+            "url": "https://loophole-letters.vercel.app/claviature",
+            "title": "Claviature: SVG Piano Revisited",
+            "summary": "In this post, I want to investigate an alternative piano keyboard sizing that is better suited for digital applications.",
+            "image": "https://loophole-letters.vercel.app/img/equal-piano.svg",
+            "date_modified": "2022-07-31T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/strudel",
+            "url": "https://loophole-letters.vercel.app/strudel",
+            "title": "Introducing Strudel",
+            "summary": "Live coding tidal patterns in the browser!",
+            "image": "https://loophole-letters.vercel.app/img/tidal.png",
+            "date_modified": "2022-04-03T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/shift-ast",
+            "url": "https://loophole-letters.vercel.app/shift-ast",
+            "title": "Bending JavaScript with shift-ast",
+            "summary": "Let's talk about JavaScript code transformations.",
+            "image": "https://loophole-letters.vercel.app/img/bender.png",
+            "date_modified": "2022-03-21T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-alternations",
+            "url": "https://loophole-letters.vercel.app/rhythmical-alternations",
+            "title": "Rhythmical Alternations",
+            "summary": "In this post, I want to take a look at alternating rhythms, which are enclosed with angle brackets in tidal mini notation.",
+            "image": "https://loophole-letters.vercel.app/img/onestep.png",
+            "date_modified": "2022-01-29T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/tidal-pegjs",
+            "url": "https://loophole-letters.vercel.app/tidal-pegjs",
+            "title": "A closer look at tidal.pegjs",
+            "summary": "Let's see how tidal.pegjs can be used to generate some rhythms.",
+            "image": "https://loophole-letters.vercel.app/img/tidal-pegjs.png",
+            "date_modified": "2022-01-15T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/abstract-syntax-trees",
+            "url": "https://loophole-letters.vercel.app/abstract-syntax-trees",
+            "title": "Abstract Syntax Trees",
+            "summary": "Let's understand how ASTs work!",
+            "image": "https://loophole-letters.vercel.app/img/ast.png",
+            "date_modified": "2022-01-14T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/next-blog",
+            "url": "https://loophole-letters.vercel.app/next-blog",
+            "title": "New Blog Launched",
+            "summary": "This blog now runs with Next.js.",
+            "image": "https://loophole-letters.vercel.app/logo.png",
+            "date_modified": "2022-01-14T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/diy-modular-synth",
+            "url": "https://loophole-letters.vercel.app/diy-modular-synth",
+            "title": "DIY Modular Synth",
+            "summary": "Let's build a modular synth!",
+            "image": "https://loophole-letters.vercel.app/img/diy-modular-synth/midi2cv-styleshot.png",
+            "date_modified": "2021-11-28T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/harmonic-lattices",
+            "url": "https://loophole-letters.vercel.app/harmonic-lattices",
+            "title": "Harmonic Lattices",
+            "summary": "A powerful way to vizualize the \"harmonic space\" of any collection of ratios is using a so called lattice.",
+            "image": "https://loophole-letters.vercel.app/img/lattice.png",
+            "date_modified": "2021-08-18T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/polyphonic-cv",
+            "url": "https://loophole-letters.vercel.app/polyphonic-cv",
+            "title": "Polyphonic MIDI to CV",
+            "summary": "After looking at the basics of analog synthesis in the last post let's now look at how to approach polyphony.",
+            "image": "https://loophole-letters.vercel.app/img/MCP4728.png",
+            "date_modified": "2021-05-22T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/analog-synthesis",
+            "url": "https://loophole-letters.vercel.app/analog-synthesis",
+            "title": "A Macro View on Analog Synthesis",
+            "summary": "Lately, I've been learning about analog synthesis",
+            "image": "https://loophole-letters.vercel.app/img/vco.png",
+            "date_modified": "2021-05-14T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-trees",
+            "url": "https://loophole-letters.vercel.app/rhythmical-trees",
+            "title": "Rhythmical Trees",
+            "summary": "After the posts about Rhythmical Arrays and Rhythmical Objects, I want to investigate the actual data structure that is at play: trees.",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-tree.png",
+            "date_modified": "2021-04-30T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/chord-scales",
+            "url": "https://loophole-letters.vercel.app/chord-scales",
+            "title": "Chord Scales",
+            "summary": "Let's find the best chord scales with a common path finding algorithm.",
+            "image": "https://loophole-letters.vercel.app/img/251graph.png",
+            "date_modified": "2021-04-11T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/diy-midi-keyboard",
+            "url": "https://loophole-letters.vercel.app/diy-midi-keyboard",
+            "title": "DIY MIDI Keyboard Scanner",
+            "summary": "How to make two MIDI keyboards out of one..",
+            "image": "https://loophole-letters.vercel.app/img/maudio49/example-connection.png",
+            "date_modified": "2021-02-11T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/pitch-class-sets",
+            "url": "https://loophole-letters.vercel.app/pitch-class-sets",
+            "title": "Pitch Class Sets",
+            "summary": "Let's explore the world of pitch class sets.",
+            "image": "https://loophole-letters.vercel.app/img/cof.png",
+            "date_modified": "2021-01-03T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/coloring-scales",
+            "url": "https://loophole-letters.vercel.app/coloring-scales",
+            "title": "Coloring Musical Scales",
+            "summary": "After we found a basic way of coloring pitches, let's now look at a way to color scales.",
+            "image": "https://loophole-letters.vercel.app/img/coloring-scales.png",
+            "date_modified": "2021-01-02T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/webmidi",
+            "url": "https://loophole-letters.vercel.app/webmidi",
+            "title": "Using MIDI with JavaScript",
+            "summary": "With the Web MIDI API, we can send and receive MIDI events from javascript",
+            "image": "https://loophole-letters.vercel.app/img/MIDI_LOGO.jpg",
+            "date_modified": "2020-12-30T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/web-audio-recorder",
+            "url": "https://loophole-letters.vercel.app/web-audio-recorder",
+            "title": "Recording Audio on the Web",
+            "summary": "I made a few experiments on Audio Recording, using the Web Audio API.",
+            "image": "https://loophole-letters.vercel.app/img/waveform.png",
+            "date_modified": "2020-10-27T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/chipsynth-sfc",
+            "url": "https://loophole-letters.vercel.app/chipsynth-sfc",
+            "title": "Recreating SNES Music with Chipsynth SFC",
+            "summary": "Recently, Chipsynth SFC was released, which brings a really accurate emulation of the SNES soundchip to VST or standalone format. Let's play around with it.",
+            "image": "https://loophole-letters.vercel.app/img/ocarina.png",
+            "date_modified": "2020-10-20T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/voicing-permutation",
+            "url": "https://loophole-letters.vercel.app/voicing-permutation",
+            "title": "Voicing Permutation",
+            "summary": "Let's try to generate any possible voicing by permutation.",
+            "image": "https://loophole-letters.vercel.app/img/voicing-permutation.png",
+            "date_modified": "2020-08-11T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-reducers",
+            "url": "https://loophole-letters.vercel.app/rhythmical-reducers",
+            "title": "Rhythmical Mutations",
+            "summary": "In this post, I want to develop the idea of mutation to allow more flexibility.",
+            "image": "https://loophole-letters.vercel.app/img/pianoroll-color.png",
+            "date_modified": "2020-08-02T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-chords",
+            "url": "https://loophole-letters.vercel.app/rhythmical-chords",
+            "title": "Rhythmical Chords",
+            "summary": "To bring rhythmical one step closer to being a hackable backing track player, I want to implement one of the most important things: chord symbols",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-chords.png",
+            "date_modified": "2020-07-30T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-ties",
+            "url": "https://loophole-letters.vercel.app/rhythmical-ties",
+            "title": "Rhythmical Ties",
+            "summary": "In modern music, ties across barlines are a common way of adding interest to a melody. Let's add tie support to rhythmical",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-tie.png",
+            "date_modified": "2020-07-10T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/sampler-instruments",
+            "url": "https://loophole-letters.vercel.app/sampler-instruments",
+            "title": "Using Sampled Instruments with Tone.js",
+            "summary": "To get away from cheap synth sounds, let's implement instruments that use samples, with the help of Tone.js.",
+            "image": "https://loophole-letters.vercel.app/img/piano-code.png",
+            "date_modified": "2020-07-08T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/ireal-analytics",
+            "url": "https://loophole-letters.vercel.app/ireal-analytics",
+            "title": "Analyzing iReal Chord Changes",
+            "summary": "Now that we have a huge dataset of chord changes, we can do some data mining on it.",
+            "image": "https://loophole-letters.vercel.app/img/ireal-composers.png",
+            "date_modified": "2020-06-14T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/ireal-changes",
+            "url": "https://loophole-letters.vercel.app/ireal-changes",
+            "title": "Parsing iReal Chord Changes",
+            "summary": "Let's get access to a huge collection of chord changes.",
+            "image": "https://loophole-letters.vercel.app/img/eleanorrigbychords.png",
+            "date_modified": "2020-06-13T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/midimoog",
+            "url": "https://loophole-letters.vercel.app/midimoog",
+            "title": "Building a Minimoog MIDI Controller",
+            "summary": "Last week, a friend a I built a MIDI Controller for the Arturia Mini V3 VST.",
+            "image": "https://loophole-letters.vercel.app/img/miniv3frontpanel.png",
+            "date_modified": "2020-06-11T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/svg-piano-roll",
+            "url": "https://loophole-letters.vercel.app/svg-piano-roll",
+            "title": "SVG Piano Roll Component",
+            "summary": "After playback was implemented in the last post, we can now feed our eyes with some colored bars.",
+            "image": "https://loophole-letters.vercel.app/img/piano-roll.png",
+            "date_modified": "2020-06-10T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-playback",
+            "url": "https://loophole-letters.vercel.app/rhythmical-playback",
+            "title": "Tone.js Playback",
+            "summary": "Before implementing more rhythmical features, it would be good to hear some results. This is where the Player comes in.",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-playback.png",
+            "date_modified": "2020-06-09T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-objects",
+            "url": "https://loophole-letters.vercel.app/rhythmical-objects",
+            "title": "Rhythmical Objects",
+            "summary": "Today, I want to write about why and how the powerful rhythmical object format is implemented.",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-object.png",
+            "date_modified": "2020-05-29T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-arrays",
+            "url": "https://loophole-letters.vercel.app/rhythmical-arrays",
+            "title": "Rhythmical Arrays",
+            "summary": "In this post, I want to describe how and why rhythmical is implemented.",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-array.png",
+            "date_modified": "2020-05-27T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/rhythmical-staff",
+            "url": "https://loophole-letters.vercel.app/rhythmical-staff",
+            "title": "Rhythmical Staff Notation",
+            "summary": "In this post, I want to find out how I can render rhythmical format as staff notation.",
+            "image": "https://loophole-letters.vercel.app/img/rhythmical-staff.png",
+            "date_modified": "2020-05-24T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/trumpet-harmonics",
+            "url": "https://loophole-letters.vercel.app/trumpet-harmonics",
+            "title": "Trumpet Harmonics",
+            "summary": "The harmonic spiral from last post can also be used to vizualize the harmonics of instruments that work with overblowing, like a trumpet.",
+            "image": "https://loophole-letters.vercel.app/img/trumpet-spiral.png",
+            "date_modified": "2020-05-19T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/harmonic-spirals",
+            "url": "https://loophole-letters.vercel.app/harmonic-spirals",
+            "title": "Harmonic Spirals",
+            "summary": "Let's create some harmonic spirals by winding the number line.",
+            "image": "https://loophole-letters.vercel.app/img/harmonic-spiral.png",
+            "date_modified": "2020-05-09T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/monochord",
+            "url": "https://loophole-letters.vercel.app/monochord",
+            "title": "DIY Monochord",
+            "summary": "After fiddling around with digital monochords and cheap web audio sounds, I decided to give my build a physical monochord from scrap wood.",
+            "image": "https://loophole-letters.vercel.app/img/monochord0.jpg",
+            "date_modified": "2020-05-07T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/5limit-just-intonation",
+            "url": "https://loophole-letters.vercel.app/5limit-just-intonation",
+            "title": "5 Limit Just Intonation",
+            "summary": "As this is the third post of a series of a series about Just Intonation, let's talk about thirds.",
+            "image": "https://loophole-letters.vercel.app/img/5limit-grid.png",
+            "date_modified": "2020-05-02T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/3limit-just-intonation",
+            "url": "https://loophole-letters.vercel.app/3limit-just-intonation",
+            "title": "3 Limit Just Intonation",
+            "summary": "After building a foundation of understanding pure intervals in the last post, we will now look at different ways of building tuning systems with them.",
+            "image": "https://loophole-letters.vercel.app/img/3limit-chroma.png",
+            "date_modified": "2020-04-26T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/intervals",
+            "url": "https://loophole-letters.vercel.app/intervals",
+            "title": "Pure Intervals",
+            "summary": "This article is the first of a series about Just Intonation.",
+            "image": "https://loophole-letters.vercel.app/img/lambdoma.png",
+            "date_modified": "2020-04-22T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/harmonics",
+            "url": "https://loophole-letters.vercel.app/harmonics",
+            "title": "The Harmonic Series & Additive Synthesis",
+            "summary": "Let's understand the harmonic series by looking at monochords.",
+            "image": "https://loophole-letters.vercel.app/img/animated-square.gif",
+            "date_modified": "2020-04-20T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/animation",
+            "url": "https://loophole-letters.vercel.app/animation",
+            "title": "Animating React Components",
+            "summary": "Let's make a react component that can be used to animate anything.",
+            "image": "https://loophole-letters.vercel.app/img/animated-plot.gif",
+            "date_modified": "2020-04-19T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/plotting-functions",
+            "url": "https://loophole-letters.vercel.app/plotting-functions",
+            "title": "Plotting Functions with React and d3.js",
+            "summary": "As the basis of many upcoming visualizations.",
+            "image": "https://loophole-letters.vercel.app/img/plot.png",
+            "date_modified": "2020-04-18T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/coloring-pitches",
+            "url": "https://loophole-letters.vercel.app/coloring-pitches",
+            "title": "Coloring Pitches",
+            "summary": "Let's play with colors. Vizualization loves color. To map musical notes to color, we can do various things.",
+            "image": "https://loophole-letters.vercel.app/img/colorpiano.png",
+            "date_modified": "2020-04-01T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/combinatorial-search",
+            "url": "https://loophole-letters.vercel.app/combinatorial-search",
+            "title": "Combinatorial Search",
+            "summary": "Let's look at a concept that be used in a future post to find all possible piano voicings for a given chord.",
+            "image": "https://loophole-letters.vercel.app/img/balls.png",
+            "date_modified": "2020-03-31T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/chords",
+            "url": "https://loophole-letters.vercel.app/chords",
+            "title": "Chords and Scales",
+            "summary": "Let's use the SVG Piano to display chords.",
+            "image": "https://loophole-letters.vercel.app/img/chords-scales.png",
+            "date_modified": "2020-03-27T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/svg-piano",
+            "url": "https://loophole-letters.vercel.app/svg-piano",
+            "title": "SVG Piano",
+            "summary": "Let's talk about virtual keyboards: They are good to visualize chords as a static image and melodies as an animation.",
+            "image": "https://loophole-letters.vercel.app/img/qwerty-hancock.png",
+            "date_modified": "2020-03-26T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        },
+        {
+            "id": "https://loophole-letters.vercel.app/hello",
+            "url": "https://loophole-letters.vercel.app/hello",
+            "title": "Hello, let me enter",
+            "summary": "I will write about music and coding here.",
+            "image": "https://loophole-letters.vercel.app/img/avatar.png",
+            "date_modified": "2020-03-25T00:00:00.000Z",
+            "author": {
+                "name": "Felix Roos",
+                "url": "https://github.com/felixroos"
+            }
+        }
+    ]
+}

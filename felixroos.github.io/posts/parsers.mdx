@@ -1,0 +1,33 @@
+---
+title: Parsers
+date: '2022-01-15'
+tags: ['coding']
+image: ./logo.png
+description: Let's understand how Parsers work!
+draft: true
+---
+
+In the [last post](./abstract-syntax-trees), I looked at abstract syntax trees (ASTs).
+In this post, I want to find out how ASTs are generated using a parser.
+I am interested in the possibility to use a parser to create a language that outputs [rhythmical objects](./rhythmical-objects).
+
+## What is a parser
+
+Simply put, a parser reads a source language as text and outputs an AST.
+The process involves
+
+- a lexical analyzer that splits creates a list of tokens
+- a syntactical analyzer that creates an AST from the list of tokens
+
+Practically, a parser can be used as a basis to create any language you want.
+Languages for specific purposes are called domain specific languages (DSLs).
+
+## JS based DSLs for music
+
+Let's look at some examples of JS based DSLs for music. There are already some out there. What I found:
+
+- [tidal.pegjs](https://www.npmjs.com/package/tidal.pegjs), a parser for tidal style syntax
+- [nested tuplets / nestup](https://github.com/cutelabnyc/nested-tuplets), a language for nested rhythms
+- [in-seconds](https://github.com/danigb/in-seconds), convert musical expressions to seconds
+- [sema](https://github.com/mimic-sussex/sema), live coding DSL
+

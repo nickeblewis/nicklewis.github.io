@@ -1,0 +1,116 @@
+---
+title: New Blog Launched
+date: '2022-01-14'
+tags: ['coding']
+image: ./logo.png
+description: This blog now runs with Next.js.
+---
+
+This blog has now been moved from Gatsby to Next.js.
+
+## New Logo
+
+This is the new logo, which is a repurposed VSCode logo to look like the infinity symbol, which also happens to look a little bit like an envelope:
+
+![new logo](./logo_cropped.png?200x200)
+
+I think this is a neat visual metaphor that also happened to be really quick to stitch together 😅.
+
+## Style Update
+
+This is the before / after of the homepage:
+
+![before after](./img/next-blog-before-after.png?752x498)
+
+I kept the fonts but styled everything to not look like the default gatsby blog template + added images to soup up the look and spark some curiosity.
+Also, I added tags for each post, for which I want to add a filter in the future.
+
+The post detail page now looks like that:
+
+![before after post](./img/post-detail-before-after.png?752x520)
+
+Dark mode:
+
+![dark mode](./img/next-blog-darkmode.png)
+
+On Mobile:
+
+![mobile](./img/next-blog-mobile.png)
+
+## Tech Stack
+
+These are the most important packages:
+
+- [Next.js](https://nextjs.org/) as the foundation
+- [tailwindcss](https://tailwindcss.com/) for style
+- [next-themes](https://www.npmjs.com/package/next-themes) for darkmode
+- [next-seo](https://www.npmjs.com/package/next-seo) for quick and easy seo stuff
+- [feed](https://www.npmjs.com/package/feed) for [RSS feed generation](https://github.com/felixroos/felixroos.github.io/blob/4c62f8496ca78caf1ee28f5f07582537be2e0d17/scripts/rss.js)
+- [mdx-bundler](https://www.npmjs.com/package/mdx-bundler) to bundle posts which are mdx files
+- [gray-matter](https://www.npmjs.com/package/gray-matter) to parse post metadata
+- some unified plugins (see below)
+
+## Bundling MDX
+
+Moving to Next.js, I wanted to migrate all the old posts.
+As described in [this post](https://dev.to/pyadav/mdx-bundler-with-next-js-2kg3), there are currently 3 ways to add MDX to a Next.js site:
+
+1. Official MDX support by Next.js [@next/mdx](https://www.npmjs.com/package/@next/mdx)
+2. Hashicorp's [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)
+3. Kent C Dodds's [mdx-bundler](https://github.com/kentcdodds/mdx-bundler)
+
+next-mdx-remote is out because it [does not support imports](https://github.com/hashicorp/next-mdx-remote/issues/143).
+@next/mdx works great but it has a few caveats:
+
+- [It does not support frontmatter](https://nextjs.org/docs/advanced-features/using-mdx#frontmatter).
+- [It requires to export the layout inside each post](https://nextjs.org/docs/advanced-features/using-mdx#layouts).
+- It does not support plugins that are ESM only, because [next.config.js does not allow that](https://github.com/vercel/next.js/discussions/32239). Unfotunately, I need [remark-math](https://www.npmjs.com/package/remark-math) and [remark-toc](https://www.npmjs.com/package/remark-toc) which are ESM only.
+
+mdx-bundler does not have those shortcomings. It has a completely isolated bundler, which runs [esbuild](https://esbuild.github.io/).
+This makes it independent of Next.js, which means I can build my posts for any platform in the future. Compared to @next/mdx it has only 2 shortcomings:
+
+- dev server is slower and has no hot reload
+- might have larger bundles
+
+## Unified Plugins
+
+MDX is built on top of [unified.js](https://unifiedjs.com/), which is a collection of tools to transform content, in my case:
+
+- remark to process markdown
+- rehype to process html
+
+To enrich the posts, I am using the following plugins:
+
+- [mdx-prism](https://www.npmjs.com/package/mdx-prism) / [prismjs](https://www.npmjs.com/package/prismjs) to highlight code blocks
+- [remark-gfm](https://www.npmjs.com/package/remark-gfm) extends markdown syntax to support [GitHub Flavored Markdown](https://github.github.com/gfm/)
+- [remark-math](https://www.npmjs.com/package/remark-math) + [rehype-katex](https://www.npmjs.com/package/rehype-katex) for formulas
+- [rehype-slug](https://www.npmjs.com/package/rehype-slug) to add ids to headings.
+- [rehype-autolink-headings](https://www.npmjs.com/package/rehype-autolink-headings) to add anchor links to headings.
+- [remark-toc](https://www.npmjs.com/package/remark-toc) to generate a table of contents.
+
+## Why I chose Next.js over Gatsby
+
+While settings up my gatsby blog was quite straightforward, changing it was not that easy.
+I was using [gatsby-theme-blog](https://www.gatsbyjs.com/plugins/gatsby-theme-blog/), which allows starting a blog using MDX in no time.
+Gatsby uses so called [themes](https://www.gatsbyjs.com/docs/themes/), where the actual code of the theme is versioned but you can change files by "shadowing".
+The advantage is that you get upstream changes without needing to update unshadowed files.
+This sounds good in theory, but in practice, it became a little blackboxy:
+
+- I found it hard to know which files to shadow, as I needed to manually crawl through the gatsbyjs monorepo. For example, as for the time of writing this article, the "View plugin on GitHub" link on the [gatsby-theme-blog](https://www.gatsbyjs.com/plugins/gatsby-theme-blog/) doc page is dead..
+- In practice, I did not manage to update gatsby-theme-blog to the new version in a reasonable amount of time.
+- I did not really know what was actually happening under the hood.
+- The worst of all: code splitting seemed to not work with mdx, as everything was in one bundle!
+
+On the other hand, I imagined having a "simple" Next.js project with no layer of abstraction would be much easier to work with.
+
+Also, Next.js had introduced static builds, so I gave it a try.
+
+## Deployment
+
+I started out deploying to github pages like before, but turned to vercel as they have a free plan for hobbyists + out of the box images optimization.
+Maybe I will move back to gh-pages when version 3 of [next-optimized-images](https://www.npmjs.com/package/next-optimized-images) is ready.
+I like the simplicity of a static build, but on the other hand it does not really matter..
+
+## Conclusion
+
+Now that the update is done (after tiny step by tiny step migration in the last months), I can write some more posts..

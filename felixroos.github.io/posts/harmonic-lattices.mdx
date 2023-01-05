@@ -1,0 +1,332 @@
+---
+title: Harmonic Lattices
+date: '2021-08-18'
+tags: ['tuning']
+image: ./img/lattice.png
+description: A powerful way to vizualize the "harmonic space" of any collection of ratios is using a so called lattice.
+loadKatex: true
+---
+
+import { Plot, defaultPlotColors } from '../components/common/Plot.tsx';
+import { multisets, equivalence, clamp, lattice } from '../components/tuning/tuning';
+import { primes } from '../components/common/prime';
+import { Color } from '../components/common/Color.tsx';
+import Player from '../components/rhythmical/components/Player.tsx';
+import { dimensionUnitsTonnetz, dimensionUnitsWilson, dimensionUnitsGrady } from '../components/tuning/lattices.ts';
+import Lattice2D from '../components/tuning/Lattice2D.tsx';
+import Lattice3D from '../components/tuning/Lattice3D.tsx';
+import LatticeAnimated from '../components/tuning/LatticeAnimated.tsx';
+import LatticeThree from '../components/tuning/LatticeThree.tsx';
+import KatexSteps from '../components/common/KatexSteps.tsx';
+import { renderRhythmObject } from '../components/rhythmical/rhythmical.ts';
+import { inheritProperty } from '../components/rhythmical/features/inherit.ts';
+import drums from '../instruments/tidal';
+import { primefactors, ratioPrimePowers, ratioPrimeVector } from '../components/common/prime';
+import Fraction from 'fraction.js';
+import SVG, { cubeLines, projection, rotateX, rotateY, rotateZ, project3d } from '../components/3d/SVG';
+import * as math from 'mathjs';
+import { State } from 'react-powerplug';
+import Slider from '@material-ui/core/Slider';
+import AnimationFrame from '../components/common/AnimationFrame.tsx';
+// import 'katex/dist/katex.css'; // comment out when using next.js
+import { BlockMath } from 'react-katex';
+
+<LatticeAnimated
+  ratios={lattice(7, 25, true)}
+  scale={90}
+  width={800}
+  maxDistance={3}
+  unit="note"
+  rotator={(angle) => [-12, -angle, 0]}
+/>
+
+In my post about [Pure Intervals](./intervals), I used two ways to bring order to the infinite amount of ratios of natural
+numbers: The harmonic series and the Lambdoma. Later, I investigated the [3-limit](./3limit-just-intonation) and [5-limit](./5limit-just-intonation)
+tuning systems, which are another way to organize the landscape of Just Intonation.
+
+Another powerful way to vizualize the "harmonic space" of any collection of ratios is using a so called lattice.
+
+Note: This post is not optimized for dark mode.
+
+## Table of Contents
+
+## Lattices
+
+A lattice organizes ratios by prime factorization. Before understanding how that works, let's have a look:
+
+### 3 Limit Lattice
+
+The (not really useful) "lattice" of a 3 limit pentatonic scale looks like this:
+
+<Lattice2D
+  ratios={[1, 3 / 2, 4 / 3, 9 / 8, 27 / 16]}
+  minPrime={2}
+  circleRadius={16}
+  width={500}
+  flipX={false}
+  flipY={true}
+  showSettings={true}
+/>
+
+- The y direction (vertical) represents powers of 3 (fifths + octave), in this case from -1 to 3.
+- The x direction (horizontal) represents powers of 2 (octaves), in this case -4, -3, -1, 0 and 2, deliberately chosen to move all pitches in the same octave (between 1 and 2).
+
+We could further fill the x direction with different octaves of the same pitch:
+
+<Lattice2D
+  ratios={[1 / 2, 1, 2, 9 / 16, 9 / 8, 9 / 4, 2 / 3, 4 / 3, 3, 3 / 2, 3 / 4, 27 / 8, 27 / 16]}
+  minPrime={2}
+  circleRadius={16}
+  width={500}
+  flipX={false}
+  flipY={true}
+  showSettings={true}
+/>
+
+_To hear how the fractions sound, click on the colored circles_
+
+If we agree on the fact that octaves can be seen as the same pitch class (octave equivalence), we can ignore the dimension of the octave completely:
+
+<Lattice2D
+  ratios={[1, 9 / 8, 4 / 3, 3 / 2, 27 / 16]}
+  minPrime={3}
+  circleRadius={12}
+  width={500}
+  flipY={true}
+  showSettings={true}
+/>
+
+This leaves us just 1 dimension, where the 3 is the x axis. This "trick" saves us 1 dimension for the upcoming higher limit systems.
+
+### 5 limit lattice
+
+In a 5 limit system, we can keep the 3 (fifths) as the x axis, and add the 5 (thirds) on the y axis:
+
+<State initial={{ limit: 15 }}>
+  {({ state, setState }) => (
+    <>
+      <Slider min={9} max={125} step={3} value={state.limit} onChange={(e, v) => setState({ limit: v })} />
+      <Lattice2D
+        ratios={lattice(5, state.limit, true)}
+        width={800}
+        flipY={true}
+        circleRadius={12}
+        showSettings={true}
+      />
+    </>
+  )}
+</State>
+
+The slider controls the maximum complexity of intervals, using Tenney Height, which will be the topic of a future post.
+
+In many cases, the lattice will be drawn like that:
+
+<State initial={{ limit: 15 }}>
+  {({ state, setState }) => (
+    <>
+      <Slider min={5} max={125} step={3} value={state.limit} onChange={(e, v) => setState({ limit: v })} />
+      <Lattice2D
+        ratios={lattice(5, state.limit, true)}
+        width={800}
+        flipY={true}
+        dimensionUnits={dimensionUnitsTonnetz}
+        circleRadius={12}
+        showSettings={true}
+      />
+    </>
+  )}
+</State>
+
+Sheering the y axis to the right results in triangles, where those that point upwards are major and those that point downwards are minor.
+
+### 7 limit lattice
+
+In a 7 limit system, we need one more dimension for 7ths (btw: it's just a coincidence that 7 = 7ths). To draw it in 3d, we can just use a 45 degree angle:
+
+<State initial={{ limit: 20 }}>
+  {({ state, setState }) => (
+    <>
+      <Slider min={5} max={125} step={3} value={state.limit} onChange={(e, v) => setState({ limit: v })} />
+      <Lattice2D ratios={lattice(7, state.limit, true)} width={800} flipY={true} showSettings={true} />
+    </>
+  )}
+</State>
+
+With more and more fractions, it gets difficult to overview the lattice.
+As we now have 3 dimensions, we could draw it in 3d space:
+
+<State initial={{ limit: 20 }}>
+  {({ state, setState }) => (
+    <>
+      <Slider min={5} max={100} step={3} value={state.limit} onChange={(e, v) => setState({ limit: v })} />
+      <LatticeAnimated
+        ratios={lattice(7, state.limit, true)}
+        scale={90}
+        width={800}
+        maxDistance={3}
+        rotator={(angle) => [-12, -angle, 0]}
+      />
+    </>
+  )}
+</State>
+
+### 11 limit lattice
+
+If we add just another dimension with 11 limit (adding augmented 4ths), we run out of brain power.. vizualizing 4 dimensions in 2d is kind of impossible.
+But we can just use another angle for this new dimension that won't get too much in our way:
+
+<State initial={{ limit: 11 }}>
+  {({ state, setState }) => (
+    <>
+      <Slider min={11} max={110} step={3} value={state.limit} onChange={(e, v) => setState({ limit: v })} />
+      <Lattice2D
+        ratios={lattice(11, state.limit, true)}
+        width={800}
+        flipY={true}
+        maxPrime={11}
+        dimensionUnits={dimensionUnitsWilson}
+        showSettings={true}
+      />
+    </>
+  )}
+</State>
+
+### 13 limit lattice
+
+To go full on crazy, we can add a 5th dimension:
+
+<State initial={{ limit: 13 }}>
+  {({ state, setState }) => (
+    <>
+      <Slider min={13} max={110} step={3} value={state.limit} onChange={(e, v) => setState({ limit: v })} />
+      <Lattice2D
+        ratios={lattice(13, state.limit, true)}
+        width={800}
+        flipY={true}
+        maxPrime={13}
+        dimensionUnits={dimensionUnitsGrady}
+        showSettings={true}
+      />
+    </>
+  )}
+</State>
+
+## Calculating Prime Vectors aka monzos
+
+Let's talk about the details on how to calculate the vector of any ratio.
+For example, a 3 limit tuning system consists of ratios generated by
+
+<BlockMath>r = 2^x * 3^y</BlockMath>
+
+To calculate the coordinates of any ratio inside 3 limit, we need to factorize the ratio into its prime components.
+We can then use the the exponents as a vector:
+
+export const primeEquation = (r, limit) => {
+  const f = new Fraction(r);
+  return [
+    `\\frac{${f.n}}{${f.d}}`,
+    `\\frac{${primefactors(f.n).join('*') || '1'}}{${primefactors(f.d).join('*') || '1'}}`,
+    ratioPrimePowers(f.n, f.d)
+      .map(([f, p]) => `${f}^{${p}}`)
+      .join('*') || '1',
+    `\\begin{pmatrix}
+        ${ratioPrimeVector(f.n, f.d, 2, limit).join('\\\\')}
+     \\end{pmatrix}`,
+  ];
+};
+
+<KatexSteps steps={primeEquation(1 / 1, 3)} />
+<br />
+<KatexSteps steps={primeEquation(3 / 2)} />
+<br />
+<KatexSteps steps={primeEquation(4 / 3)} />
+<br />
+<KatexSteps steps={primeEquation(9 / 8)} />
+<br />
+<KatexSteps steps={primeEquation(27 / 16)} />
+<br />
+
+The resulting vectors can then be used to draw the ratio to the correct coordinates.
+
+The same calculation can be used with more dimensions by just adding more prime factors.
+
+Those prime vectors are also called [monzo](https://en.xen.wiki/w/Monzo).
+
+## In Code
+
+What we want:
+
+```js
+expect(primevector(4)).toEqual([2]); // 2^2
+expect(primevector(12)).toEqual([2, 1]); // 2^2 + 3^1
+expect(primevector(126)).toEqual([1, 2, 0, 1]);
+expect(primevector(15)).toEqual([0, 1, 1]);
+```
+
+How I did it:
+
+```js
+export function primevector(n) {
+  const limit = primelimit(n);
+  const dimensions = primes(2, limit);
+  const powers = primepowers(n);
+  return dimensions.map((d) => powers.find(([f]) => f === d)?.[1] || 0);
+}
+
+export function primelimit(n) {
+  return max(primefactors(n));
+}
+
+export function primefactors(n) {
+  const factors = [];
+  let divisor = 2;
+  while (n >= 2) {
+    if (n % divisor == 0) {
+      factors.push(divisor);
+      n = n / divisor;
+    } else {
+      divisor++;
+    }
+  }
+  return factors;
+}
+
+export function primes(from, to) {
+  const primes = [];
+  for (let i = from; i <= to; ++i) {
+    if (isPrime(i)) {
+      primes.push(i);
+    }
+  }
+  return primes;
+}
+
+export function isPrime(num) {
+  for (var i = 2; i < num; i++) {
+    if (num % i === 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function primepowers(n) {
+  const factors = primefactors(n);
+  const powers = [];
+  let latest;
+  for (let factor of factors) {
+    if (!latest || latest !== factor) {
+      powers.push([factor, 1]);
+    } else {
+      powers[powers.length - 1][1] += 1;
+    }
+    latest = factor;
+  }
+  return powers;
+}
+```
+
+## Conclusion
+
+In this post, we saw how to construct harmonic lattices for any number of dimensions.
+In a future post, I want to talk about alternative just intonation systems like combination product sets, which can also be vizualized in a lattice.

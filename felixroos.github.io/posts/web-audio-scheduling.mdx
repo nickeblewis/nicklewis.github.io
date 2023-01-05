@@ -1,0 +1,294 @@
+---
+title: Web Audio Scheduling
+date: '2022-09-02'
+keywords: ['web audio']
+tags: ['web audio', 'code']
+image: ./img/scheduling/shortinterval.png
+description: Comparing different approaches to schedule Web Audio
+---
+
+In this post, I want to test out different ways of controlling events in time when working with the Web Audio API.
+
+## Table of Contents
+
+## Built-In Web Audio Scheduling Methods
+
+In Web Audio, any node that is a child of the [AudioScheduledSourceNode](https://developer.mozilla.org/en-US/docs/Web/API/AudioScheduledSourceNode)
+can be scheduled using the inherited methods `start` and `stop`. For example, we can schedule an oscillator like this:
+
+```js
+const ctx = new AudioContext();
+const o = ctx.createOscillator();
+o.frequency.value = 440;
+o.connect(ctx.destination);
+o.start(ctx.currentTime + 0.1);
+o.stop(ctx.currentTime + 1.1);
+```
+
+<button
+  className="text-white bg-sky-600 border-2 border-sky-800 p-2 m-1 rounded-md"
+  onClick={() => {
+    const ctx = new AudioContext();
+    const o = ctx.createOscillator();
+    o.frequency.value = 440;
+    o.connect(ctx.destination);
+    o.start(ctx.currentTime + 0.1);
+    o.stop(ctx.currentTime + 1.1);
+  }}
+>
+  <span>play</span>
+</button>
+
+Another scheduling mechanism is using an [AudioParam](https://developer.mozilla.org/en-US/docs/Web/API/AudioParam), like the frequency of our oscillator:
+
+```js
+// following the code above:
+o.frequency.setValueAtTime(440, 0.1);
+o.frequency.linearRampToValueAtTime(880, 1.1);
+```
+
+<button
+  className="text-white bg-sky-600 border-2 border-sky-800 p-2 m-1 rounded-md"
+  onClick={() => {
+    const ctx = new AudioContext();
+    const o = ctx.createOscillator();
+    o.frequency.value = 440;
+    o.connect(ctx.destination);
+    o.start(ctx.currentTime + 0.1);
+    o.stop(ctx.currentTime + 1.1);
+    o.frequency.setValueAtTime(440, 0.1);
+    o.frequency.linearRampToValueAtTime(880, 1.1);
+  }}
+>
+  <span>play</span>
+</button>
+
+Fine! With those methods, we can control any node and its parameters in time. Why write an extra post about it?
+
+### Problem: Fire and forget
+
+With the built-in methods, everything follows the _fire and forget_ approach, where once scheduled, an event cannot be canceled or changed anymore.
+This is fine for short sequences, but it's problematic when we want to change the flow of events, or even create open ended loops.
+
+## Scheduling in JavaScript
+
+In JS, there are three methods to schedule things:
+
+- setTimeout
+- setInterval
+- requestAnimationFrame
+
+Let's be really naive and use setInterval to schedule audio:
+
+```js
+const ctx = new AudioContext();
+let period = 0.2;
+setInterval(() => {
+  const o = ctx.createOscillator();
+  o.frequency.value = 440;
+  o.connect(ctx.destination);
+  o.start(ctx.currentTime + 0.1);
+  o.stop(ctx.currentTime + period / 2 + 0.1);
+}, period * 1000);
+```
+
+export let intervalID;
+
+<button
+  className="text-white bg-sky-600 border-2 border-sky-800 p-2 m-1 rounded-md"
+  onClick={() => {
+    const ctx = new AudioContext();
+    let period = 0.2;
+    let last;
+    intervalID && clearInterval(intervalID);
+    intervalID = setInterval(() => {
+      const o = ctx.createOscillator();
+      o.frequency.value = 440;
+      o.connect(ctx.destination);
+      o.start(ctx.currentTime + 0.1);
+      o.stop(ctx.currentTime + period / 2 + 0.1);
+    }, period * 1000);
+  }}
+>
+  <span>play</span>
+</button>
+<button
+  className="text-white bg-sky-600 border-2 border-sky-800 p-2 m-1 rounded-md"
+  onClick={() => {
+    clearInterval(intervalID);
+  }}
+>
+  <span>stop</span>
+</button>
+<button
+  className="text-white bg-sky-600 border-2 border-sky-800 p-2 m-1 rounded-md"
+  onClick={() => {
+    const start = performance.now();
+    let a = [];
+    for (let i = 0; i < 1500; i++) {
+      a = [...a].sort().concat(Math.sin(i));
+    }
+    const took = performance.now() - start;
+    console.log(`work took ${took.toFixed(2)}ms`);
+  }}
+>
+  <span>do some work</span>
+</button>
+
+You might already notice that the timing is not perfect all of the time, and it gets worse if you mash that "do some work" button.
+The button just runs a dummy computation that is designed to make the JS thread busy:
+
+```js
+const start = performance.now();
+let a = [];
+for (let i = 0; i < 1500; i++) {
+  a = [...a].sort().concat(Math.sin(i));
+}
+const took = performance.now() - start;
+console.log(`work took ${took.toFixed(2)}ms`);
+```
+
+On my machine, this takes roughly 70 - 100ms and causes the beeps to stumble quite a bit.
+
+### setInterval Visualization
+
+Let's visualize how far off setInterval is:
+
+import {
+  IntervalPlot,
+  IntervalPlayground,
+} from '../components/scheduling/IntervalPlot';
+
+<IntervalPlot hideOutput />
+
+- the gray vertical lines represent callbacks of setInterval
+- the length of the gray boxes is determined by the interval between each callback
+- if the boxes overlap, it means the next callback came too early, if they are apart, it means the callback was delayed
+- delayed callbacks are shown in red
+
+We can clearly see how pressing "do some work" influences the interval structure in a bad way (and the beeping).
+
+## Revisiting the Tale of Two Clocks
+
+So far, we've found out that:
+
+- Built-In Web Audio Scheduling is accurate, but unflexible
+- JavaScript Scheduling is sloppy, but flexible
+
+So it seems that a combination of both would solve our problem. This is exactly what the famous [Tale of Two Clocks](https://web.dev/audio-scheduling/) is about.
+
+The basic idea is that each interval callback looks a little bit further into the future, creating some overlap with the next callback:
+
+<IntervalPlot overlap={0.25} />
+
+- Here, the intervals will overlap by default (interval = 0.5, overlap = 0.25)
+- The green part of each box represents the slice of time that is handled by the current callback
+- The green vertical lines represent the scheduled beeps
+- Red vertical lines represent missed beeps
+- If the next callback is delayed for some reason, we have the overlap as a safety net to not miss any portion of time
+
+The basic idea looks like this in code:
+
+```js
+const ctx = new AudioContext();
+let phase = ctx.currentTime; // playhead
+const interval = 0.5; // interval time in seconds
+const period = 0.5; // schedule period in seconds
+const overlap = 0.25; // margin for errors
+setInterval(() => {
+  // time slice for this callback:
+  const lookahead = ctx.currentTime + interval + overlap;
+  // step through each slice of time for this callback
+  while (phase < lookahead) {
+    const [begin, end] = [phase, phase + period];
+    console.log(begin, end);
+    phase += period;
+  }
+}, interval * 1000);
+```
+
+- Note that we could set a different time for scheduling (period) than we use for the callbacks (interval)
+- Instead of console logging, we can schedule any events that should happen between `begin` and `end`.
+
+### Playground
+
+Here you can play around with the 3 period, interval and overlap:
+
+<IntervalPlayground />
+
+For example, turning the interval down shows beatifully how this way of scheduling turns a sequence of loosely timed intervals into a perfect grid:
+
+![short interval](./img/scheduling/shortinterval.png)
+
+## Scheduling with requestAnimationFrame
+
+While the above approach works, it can still take a long time for the setInterval callback to be fired.
+Let's find out if we can get less delay with requestAnimationFrame:
+
+import { FramePlot } from '../components/scheduling/FramePlot';
+
+<FramePlot overlap={0.5} period={1 / 10} />
+
+With requestAnimationFrame, the callback interval will always be 1/60. Let's compare it to setInterval with the same interval:
+
+<IntervalPlot overlap={0.5} period={1 / 10} interval={1 / 60} />
+
+For my machine, the above seem to behave pretty much the same, so requestAnimationFrame does not seem to bring a huge benefit.
+
+### Problem: Inactive Tabs
+
+When a tab running a `requestAnimationFrame` loop is running in the background, browsers will actually throttle the callback rate down to roughly 1fps,
+which will also hurt our audio scheduling loop. `setInterval` seems to be continue happily in the background.
+
+## Scheduling via AudioWorklet
+
+While looking around how other people do this, I found [a hack](https://github.com/sebpiq/WAAClock/issues/20#issuecomment-1043403891) that uses an AudioWorklet as clock:
+
+```js
+const processor = `registerProcessor('tick', class Tick extends AudioWorkletProcessor {
+    constructor(...args) {
+      super(...args)
+      this.port.onmessage = (e) => {
+        this.ended = true;
+      }
+    }
+    process () {
+      this.port.postMessage('tick');
+      return !this.ended;
+    }
+  })`;
+const blob = new Blob([processor], { type: 'application/javascript' });
+const url = URL.createObjectURL(blob);
+await ctx.audioWorklet.addModule(url);
+clockNode = new AudioWorkletNode(ctx, 'tick');
+let phase;
+clockNode.port.onmessage = () => {
+  phase = phase || ctx.currentTime;
+  while (phase < ctx.currentTime + interval + overlap) {
+    phase >= ctx.currentTime && beep(phase + minLatency, period * 0.5);
+    phase += period;
+  }
+  times.current.push(ctx.currentTime);
+};
+// stop with clockNode.port.postMessage('stop');
+```
+
+- The process callback is fired for each block of 128 samples, which is 2.6ms at a sample rate of 48khz, so it would be pretty nice if we would get that callback frequency.
+- Unfortunately, the process callback is executed slower than that, most likely through the rapid fire of postMessage.
+- Also, as the postMessage is going to the main thread anyway, the blocking is pretty similar to the other methods.
+- the stopping is only indirect, as it sets ended to false and waits till the node is garbage collected.
+
+import { WorkletPlot } from '../components/scheduling/WorkletPlot';
+
+<WorkletPlot />
+
+## Conclusion
+
+After looking at `setInterval`, `requestAnimationFrame` and `AudioWorklet`s, I found out that the error is pretty similar among all of them.
+The best choice seems to be the good old `setInterval`, because
+
+- requestAnimationFrame won't work with inactive tabs + has a fixed interval
+- AudioWorklet is firing too often + seems pretty hacky + has a fixed interval
+- setInterval works in inactive tabs and has a variable interval
+
+That's it for today! I'll probably write another post about using this technique to schedule strudel events.
